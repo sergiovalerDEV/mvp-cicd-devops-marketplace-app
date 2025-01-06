@@ -66,6 +66,7 @@ docker run -p 3000:3000 mvp-cicd-devops-wallapuff
 ## 🔒 Security Note
 
 All previously visible database secrets and sensitive information in the commit history have been invalidated and removed. The current codebase contains no active secrets or sensitive data.
+Pipeline build fails as crucial secrets' values have been deleted.
 
 ## 🤝 Contributing
 
