@@ -56,7 +56,7 @@ docker run -p 3000:3000 mvp-cicd-devops-wallapuff
 
 ## 🛠️ Tech Stack
 
-- Kotlin
+- Android Studio
 - Android SDK
 - Material Design Components
 - Docker
