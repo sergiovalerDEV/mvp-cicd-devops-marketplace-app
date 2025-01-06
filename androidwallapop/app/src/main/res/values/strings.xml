@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Wallapop</string>
+
+    <string-array name="user_roles">
+        <item>Vendedor</item>
+        <item>Comprador</item>
+        <item>Administrador</item>
+    </string-array>
+
+    <string name="app_name2">Wallapop</string>
+    <string-array name="categories_array">
+        <item>Hombre</item>
+        <item>Mujer</item>
+        <item>Niños</item>
+    </string-array>
+
+</resources>
+
+

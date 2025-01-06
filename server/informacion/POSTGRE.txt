@@ -1,0 +1,47 @@
+-- Creación de la tabla role
+CREATE TABLE role (
+    id SERIAL PRIMARY KEY,  -- ID autoincremental para el rol
+    name VARCHAR(50) NOT NULL  -- Nombre del rol
+);
+
+-- Inserción de roles
+INSERT INTO role (name) VALUES
+('Vendedor'),
+('Comprador');
+
+-- Creación de la tabla usuario
+CREATE TABLE "usuario" (
+    id SERIAL PRIMARY KEY,  -- ID autoincremental para el usuario
+    email VARCHAR(100) NOT NULL UNIQUE,  -- Correo electrónico único
+    password VARCHAR(100) NOT NULL,  -- Contraseña del usuario
+    role_id INT,  -- ID del rol
+    FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE SET NULL  -- Referencia a la tabla role
+);
+
+-- Inserción de usuarios
+INSERT INTO "usuario" (email, password, role_id) VALUES
+('user1@example.com', 'password1', 1),  -- Asignando el rol "Vendedor"
+('user2@example.com', 'password2', 2),  -- Asignando el rol "Comprador"
+('user3@example.com', 'password3', 1),  -- Asignando el rol "Vendedor"
+('user4@example.com', 'password4', 2),  -- Asignando el rol "Comprador"
+('user5@example.com', 'password5', 1);  -- Asignando el rol "Vendedor"
+
+-- Creación de la tabla product
+CREATE TABLE product (
+    id SERIAL PRIMARY KEY,  -- ID autoincremental para el producto
+    imagen VARCHAR(255) NOT NULL,  -- URL de la imagen del producto
+    descripcion TEXT NOT NULL,  -- Descripción del producto
+    precio DECIMAL(10, 2) NOT NULL,  -- Precio del producto
+    usuario_id INT,  -- ID del usuario que vendió el producto
+    FOREIGN KEY (usuario_id) REFERENCES "usuario"(id) ON DELETE CASCADE  -- Referencia a la tabla usuario
+);
+
+-- Inserción de productos
+INSERT INTO product (imagen, descripcion, precio, usuario_id) VALUES
+('https://example.com/image1.jpg', 'Producto 1', 10.00, 1),  -- Vendido por user1
+('https://example.com/image2.jpg', 'Producto 2', 15.50, 1),  -- Vendido por user1
+('https://example.com/image3.jpg', 'Producto 3', 8.75, 3),   -- Vendido por user3
+('https://example.com/image4.jpg', 'Producto 4', 20.00, 5),  -- Vendido por user5
+('https://example.com/image5.jpg', 'Producto 5', 12.00, 1);  -- Vendido por user1
+
+ALTER TABLE product RENAME COLUMN usuario_id TO user_id;

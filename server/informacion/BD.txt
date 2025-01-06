@@ -1,0 +1,288 @@
+CREATE TABLE user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+dwd
+INSERT INTO user (email, password) VALUES
+('user1@example.com', 'password1'),
+('user2@example.com', 'password2'),
+('user3@example.com', 'password3'),
+('user4@example.com', 'password4'),
+('user5@example.com', 'password5');
+
+//Hacer otra versión para manejarla desde AWS
+
+----------------------------------------------
+CREATE TABLE role (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE
+);
+
+
+CREATE TABLE user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role_id INT,
+    FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE
+);
+
+
+INSERT INTO role (name) VALUES
+('Vendedor'),
+('Comprador');
+
+
+INSERT INTO user (email, password, role_id) VALUES
+('user1@example.com', 'password1', 1),  -- Asignando el rol "Vendedor"
+('user2@example.com', 'password2', 2),  -- Asignando el rol "Comprador"
+('user3@example.com', 'password3', 1),  -- Asignando el rol "Vendedor"
+('user4@example.com', 'password4', 2),  -- Asignando el rol "Comprador"
+('user5@example.com', 'password5', 1);  -- Asignando el rol "Vendedor"
+------------------------------------------------------------------------
+-- Creación de la tabla role
+CREATE TABLE role (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- Creación de la tabla user
+CREATE TABLE user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role_id INT,
+    FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE
+);
+------------------------------------------------------------------
+-- Inserción de roles
+INSERT INTO role (name) VALUES
+('Vendedor'),
+('Comprador');
+
+-- Inserción de usuarios
+INSERT INTO usuario (email, password, role_id) VALUES
+('user1@example.com', 'password1', 1),  -- Asignando el rol "Vendedor"
+('user2@example.com', 'password2', 2),  -- Asignando el rol "Comprador"
+('user3@example.com', 'password3', 1),  -- Asignando el rol "Vendedor"
+('user4@example.com', 'password4', 2),  -- Asignando el rol "Comprador"
+('user5@example.com', 'password5', 1);  -- Asignando el rol "Vendedor"
+
+-- Creación de la tabla product
+CREATE TABLE product (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    imagen VARCHAR(255) NOT NULL,
+    descripcion TEXT NOT NULL,
+    precio DECIMAL(10, 2) NOT NULL,
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
+);
+
+-- Inserción de productos
+INSERT INTO product (imagen, descripcion, precio, user_id) VALUES
+('https://example.com/image1.jpg', 'Producto 1', 10.00, 1),  -- Vendido por user1
+('https://example.com/image2.jpg', 'Producto 2', 15.50, 1),  -- Vendido por user1
+('https://example.com/image3.jpg', 'Producto 3', 8.75, 3),   -- Vendido por user3
+('https://example.com/image4.jpg', 'Producto 4', 20.00, 5),  -- Vendido por user5
+('https://example.com/image5.jpg', 'Producto 5', 12.00, 1);  -- Vendido por user1
+
+----------------------------------------------------------------------------------
+-- Creación de la tabla role
+CREATE TABLE role (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- Inserción de roles
+INSERT INTO role (name) VALUES
+('Vendedor'),
+('Comprador');
+
+-- Creación de la tabla usuario
+CREATE TABLE usuario (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role_id INT,
+    FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE SET NULL
+);
+
+-- Inserción de usuarios
+INSERT INTO usuario (email, password, role_id) VALUES
+('user1@example.com', 'password1', 1),  -- Asignando el rol "Vendedor"
+('user2@example.com', 'password2', 2),  -- Asignando el rol "Comprador"
+('user3@example.com', 'password3', 1),  -- Asignando el rol "Vendedor"
+('user4@example.com', 'password4', 2),  -- Asignando el rol "Comprador"
+('user5@example.com', 'password5', 1);  -- Asignando el rol "Vendedor"
+
+-- Creación de la tabla product
+CREATE TABLE product (
+    id SERIAL PRIMARY KEY,
+    imagen VARCHAR(255) NOT NULL,
+    descripcion TEXT NOT NULL,
+    precio DECIMAL(10, 2) NOT NULL,
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES usuario(id) ON DELETE CASCADE
+);
+
+-- Inserción de productos
+INSERT INTO product (imagen, descripcion, precio, user_id) VALUES
+('https://example.com/image1.jpg', 'Producto 1', 10.00, 1),  -- Vendido por user1
+('https://example.com/image2.jpg', 'Producto 2', 15.50, 1),  -- Vendido por user1
+('https://example.com/image3.jpg', 'Producto 3', 8.75, 3),   -- Vendido por user3
+('https://example.com/image4.jpg', 'Producto 4', 20.00, 5),  -- Vendido por user5
+('https://example.com/image5.jpg', 'Producto 5', 12.00, 1);  -- Vendido por user1
+
+-- Creación de la tabla product_rating
+CREATE TABLE product_rating (
+    id SERIAL PRIMARY KEY,
+    product_id INT NOT NULL,
+    user_id INT NOT NULL,
+    rating INT CHECK (rating >= 1 AND rating <= 5), -- Suponiendo que la puntuación es de 1 a 5
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES usuario(id) ON DELETE CASCADE
+);
+
+-- Inserción de puntuaciones
+INSERT INTO product_rating (product_id, user_id, rating) VALUES
+(1, 2, 5),  -- user2 puntúa el Producto 1 con 5 estrellas
+(1, 3, 4),  -- user3 puntúa el Producto 1 con 4 estrellas
+(2, 4, 3),  -- user4 puntúa el Producto 2 con 3 estrellas
+(3, 5, 5),  -- user5 puntúa el Producto 3 con 5 estrellas
+(4, 1, 4);  -- user1 puntúa el Producto 4 con 4 estrellas
+
+-----------------------------------------------------------------
+
+-- Creación de la tabla role
+CREATE TABLE role (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- Inserción de roles
+INSERT INTO role (name) VALUES
+('Vendedor'),
+('Comprador');
+
+-- Creación de la tabla usuario
+CREATE TABLE usuario (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role_id INT,
+    FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE SET NULL
+);
+
+-- Inserción de usuarios
+INSERT INTO usuario (email, password, role_id) VALUES
+('user1@example.com', 'password1', 1),  -- Asignando el rol "Vendedor"
+('user2@example.com', 'password2', 2),  -- Asignando el rol "Comprador"
+('user3@example.com', 'password3', 1),  -- Asignando el rol "Vendedor"
+('user4@example.com', 'password4', 2),  -- Asignando el rol "Comprador"
+('user5@example.com', 'password5', 1);  -- Asignando el rol "Vendedor"
+
+-- Creación de la tabla category
+CREATE TABLE category (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- Inserción de categorías
+INSERT INTO category (name) VALUES
+('Hombre'),
+('Mujer'),
+('Niños');
+
+-- Creación de la tabla product
+CREATE TABLE product (
+    id SERIAL PRIMARY KEY,
+    imagen VARCHAR(255) NOT NULL,
+    descripcion TEXT NOT NULL,
+    precio DECIMAL(10, 2) NOT NULL,
+    user_id INT,
+    category_id INT,
+    FOREIGN KEY (user_id) REFERENCES usuario(id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE SET NULL
+);
+
+-- Inserción de productos
+INSERT INTO product (imagen, descripcion, precio, user_id) VALUES
+('https://example.com/image1.jpg', 'Producto 1', 10.00, 1),  -- Vendido por user1
+('https://example.com/image2.jpg', 'Producto 2', 15.50, 1),  -- Vendido por user1
+('https://example.com/image3.jpg', 'Producto 3', 8.75, 3),   -- Vendido por user3
+('https://example.com/image4.jpg', 'Producto 4', 20.00, 5),  -- Vendido por user5
+('https://example.com/image5.jpg', 'Producto 5', 12.00, 1);  -- Vendido por user1
+
+-- Creación de la tabla product_rating
+CREATE TABLE product_rating (
+    id SERIAL PRIMARY KEY,
+    product_id INT NOT NULL,
+    user_id INT NOT NULL,
+    rating INT CHECK (rating >= 1 AND rating <= 5), -- Suponiendo que la puntuación es de 1 a 5
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES usuario(id) ON DELETE CASCADE
+);
+
+-- Inserción de puntuaciones
+INSERT INTO product_rating (product_id, user_id, rating) VALUES
+(1, 2, 5),  -- user2 puntúa el Producto 1 con 5 estrellas
+(1, 3, 4),  -- user3 puntúa el Producto 1 con 4 estrellas
+(2, 4, 3),  -- user4 puntúa el Producto 2 con 3 estrellas
+(3, 5, 5),  -- user5 puntúa el Producto 3 con 5 estrellas
+(4, 1, 4);  -- user1 puntúa el Producto 4 con 4 estrellas
+
+ALTER TABLE product
+ADD COLUMN category_id INT,
+ADD FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE SET NULL;
+
+-- Enlazar productos a categorías
+UPDATE product SET category_id = 1 WHERE id = 1;  -- Producto 1 a Hombre
+UPDATE product SET category_id = 2 WHERE id = 2;  -- Producto 2 a Mujer
+UPDATE product SET category_id = 3 WHERE id = 3;  -- Producto 3 a Niños
+UPDATE product SET category_id = 1 WHERE id = 4;  -- Producto 4 a Hombre
+UPDATE product SET category_id = 2 WHERE id = 5;  -- Producto 5 a Mujer
+
+ALTER TABLE product
+ADD COLUMN palabras_clave TEXT;
+----------------------------------------------------------------------------
+const rateProduct = async (req, res) => { //No dejamos valorar el mismo producto por el mismo usuario más de una vez 
+    const { product_id, user_id, rating } = req.body;
+
+    // Validar que la puntuación esté en el rango correcto
+    if (rating < 1 || rating > 5) {
+        return res.status(400).json({ message: "La puntuación debe estar entre 1 y 5" });
+    }
+
+    try {
+        // Comprobar si el usuario ya ha valorado este producto
+        const { rows: existingRating } = await myPool.query(
+            "SELECT * FROM product_rating WHERE product_id = $1 AND user_id = $2",
+            [product_id, user_id]
+        );
+
+        if (existingRating.length > 0) {
+            // Si el usuario ya ha valorado este producto, no permitimos la valoración
+            return res.status(403).json({ message: "No puedes valorar este producto más de una vez." });
+        }
+
+        // Si no existe, insertamos una nueva valoración
+        await myPool.query(
+            "INSERT INTO product_rating (product_id, user_id, rating) VALUES ($1, $2, $3)",
+            [product_id, user_id, rating]
+        );
+        return res.status(201).json({ message: "Valoración añadida exitosamente" });
+
+    } catch (error) {
+        console.error("Error al valorar el producto:", error);
+        
+        // Manejo de errores más descriptivo
+        if (error.code === '23503') {
+            return res.status(400).json({ message: "Error de referencia: Asegúrate de que el producto y el usuario existen." });
+        } else {
+            return res.status(500).json({ message: "Error en el servidor", error: error.message });
+        }
+    }
+};

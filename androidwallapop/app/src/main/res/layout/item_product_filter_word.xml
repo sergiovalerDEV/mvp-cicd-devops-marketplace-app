@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp"
+    android:backgroundTint="@android:color/white">
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:padding="16dp">
+
+<!-- Imagen del producto -->
+<ImageView
+    android:id="@+id/ivProductImage"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    android:scaleType="centerCrop"
+    android:layout_marginBottom="8dp" />
+
+<!-- Descripción del producto -->
+<TextView
+    android:id="@+id/tvDescripcion"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    android:textColor="@android:color/black"
+    android:layout_marginTop="8dp" />
+
+<!-- Precio del producto -->
+<TextView
+    android:id="@+id/tvPrecio"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="14sp"
+    android:textColor="@android:color/holo_green_dark"
+android:layout_marginTop="4dp"
+android:layout_marginBottom="8dp" />
+
+<!-- Contenedor horizontal para los botones -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="8dp">
+
+    <!-- Botón de Comprar -->
+    <Button
+        android:id="@+id/btnBuy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Comprar"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/primary"
+        android:layout_marginEnd="4dp" />
+
+    <!-- Botón de Valorar -->
+    <Button
+        android:id="@+id/btnRate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Valorar"
+        android:textColor="@android:color/white"
+        android:layout_marginStart="4dp" />
+
+</LinearLayout>
+
+</LinearLayout>
+
+    </androidx.cardview.widget.CardView>

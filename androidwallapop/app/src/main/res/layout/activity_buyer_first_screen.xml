@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <!-- Botón: Comprar Producto -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBuyProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Comprar Producto"
+        android:textColor="@color/black"
+        app:strokeColor="@color/primary"
+        app:strokeWidth="2dp"
+        android:padding="12dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="center"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+    <!-- Botón: Mis Compras -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnListPurchases"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mis Compras"
+        android:textColor="@color/black"
+        app:strokeColor="@color/primary"
+        app:strokeWidth="2dp"
+        android:padding="12dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="center"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+    <!-- Botón: Top 10 Ventas -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnTopSales"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Top 10 Ventas"
+        android:textColor="@color/black"
+        app:strokeColor="@color/primary"
+        app:strokeWidth="2dp"
+        android:padding="12dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="center"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+    <!-- Botón: Ver Ofertas -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnViewOffers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ver Ofertas"
+        android:textColor="@color/black"
+        app:strokeColor="@color/primary"
+        app:strokeWidth="2dp"
+        android:padding="12dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="center"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+    <!-- Botón: Top 10 Valoraciones -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnTopRated"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Top 10 Valoraciones"
+        android:textColor="@color/black"
+        app:strokeColor="@color/primary"
+        app:strokeWidth="2dp"
+        android:padding="12dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="center"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+</LinearLayout>
