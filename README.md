@@ -1,4 +1,4 @@
-# mvp-cicd-devops-wallapuff
+# mvp-cicd-devops-marketplace-app
 
 🚀 Wallapop-inspired marketplace showcasing MVP architecture, advanced CI/CD pipeline, and DevOps best practices.
 
